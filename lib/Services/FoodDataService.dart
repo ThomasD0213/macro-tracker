@@ -69,7 +69,8 @@ class FoodDataService {
   factory FoodDataService() {
     return _foodDataService;
   }
-  // used as an example from https://docs.flutter.dev/cookbook/networking/fetch-data
+
+  /// Returns a Future<Food> generated from a request to https://app.swaggerhub.com/apis/fdcnal/food-data_central_api/1.0.1#/FDC/getFood
   Future<Food> fetchFoodFromFdcId(int fdcId) async {
     final response = await http.get(Uri.parse("$API_URL/v1/food/$fdcId?format=abridged$API_KEY_PARAM"));
     if(response.statusCode == 200) {
@@ -80,4 +81,17 @@ class FoodDataService {
     }
   }
 
+  Future<Food> fetchFoodFromGtinUpc(String gtinUpc) async {
+    String dataType = "Branded"; // it is assumed that if a gtinUpc (barcode) is being read that it's a branded item
+    final response = await http.get(Uri.parse("$API_URL/v1/foods/search?query=$gtinUpc&dataType=$dataType$API_KEY_PARAM"));
+    if(response.statusCode == 200) {
+      var prRaw = jsonDecode(response.body) as Map<String, dynamic>; //parsedResponse as raw json
+      var pr = prRaw['foods'][0];
+      return Food.fromJson(pr);
+    }
+    else {
+      throw Exception("failed to load food");
+    }
+
+  }
 }
