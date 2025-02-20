@@ -7,7 +7,7 @@ part of 'FoodDataService.dart';
 // **************************************************************************
 
 FoodNutrient _$FoodNutrientFromJson(Map<String, dynamic> json) => FoodNutrient(
-      number: (json['number'] as num?)?.toInt(),
+      number: json['number'] as String?,
       name: json['name'] as String?,
       amount: (json['amount'] as num?)?.toDouble(),
       unitName: json['unitName'] as String?,

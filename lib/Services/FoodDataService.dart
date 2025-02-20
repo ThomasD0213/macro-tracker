@@ -1,3 +1,5 @@
+import "dart:convert";
+
 import "package:http/http.dart" as http;
 import "package:json_annotation/json_annotation.dart";
 
@@ -7,11 +9,11 @@ part 'FoodDataService.g.dart';
 @JsonSerializable()
 class FoodNutrient {
   /// **this is a guess** used by the FDC to determine nutrient type.
-  final int? number;
+  final String? number; // this is a String despite the official documentation saying its an unsigned int
   /// Name of the nutrient ie. 'Iron, Fe'
   final String? name;
   /// amount of the nutrient in the food item it is associated with ie. 2.0
-  final double?amount;
+  final double? amount;
   /// the unit associated with the amount ie. 'mg', 'g'
   final String? unitName;
   /// Unknown attribute, means nothing to us (afaik atm)
@@ -68,8 +70,14 @@ class FoodDataService {
     return _foodDataService;
   }
   // used as an example from https://docs.flutter.dev/cookbook/networking/fetch-data
-  Future<http.Response> fetchFoodFromFdcId(int fdcId) {
-    return http.get(Uri.parse("$API_URL/v1/food/$fdcId?format=abridged$API_KEY_PARAM"));
+  Future<Food> fetchFoodFromFdcId(int fdcId) async {
+    final response = await http.get(Uri.parse("$API_URL/v1/food/$fdcId?format=abridged$API_KEY_PARAM"));
+    if(response.statusCode == 200) {
+      return Food.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+    }
+    else {
+      throw Exception("failed to load food");
+    }
   }
 
 }
