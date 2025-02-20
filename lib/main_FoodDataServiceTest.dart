@@ -74,8 +74,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    //futureFood = fds.fetchFoodFromFdcId(1592891);
-    futureFood = fds.fetchFoodFromGtinUpc("021000036868");
+    futureFood = fds.fetchFoodFromFdcId(1592891);
+    //futureFood = fds.fetchFoodFromGtinUpc("021000036868");
   }
 
   @override
@@ -119,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
               future: futureFood,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return Text(snapshot.data!.description);
+                  return Text("${snapshot.data!.brandOwner}\n${snapshot.data!.description}\n${snapshot.data!.foodNutrients!.first.name}\n${snapshot.data!.foodNutrients!.first.amount}");
                 } else if (snapshot.hasError) {
                   return Text('${snapshot.stackTrace}');
                 }
