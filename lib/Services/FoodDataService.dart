@@ -9,10 +9,16 @@ part 'FoodDataService.g.dart';
 @JsonSerializable()
 class FoodNutrient {
   /// **this is a guess** used by the FDC to determine nutrient type.
+  @JsonKey(name: 'nutrientNumber')
+  @JsonKey(name: 'number')
   final String? number; // this is a String despite the official documentation saying its an unsigned int
   /// Name of the nutrient ie. 'Iron, Fe'
+  @JsonKey(name: 'name')
+  @JsonKey(name: 'nutrientName')
   final String? name;
   /// amount of the nutrient in the food item it is associated with ie. 2.0
+  @JsonKey(name: 'value')
+  @JsonKey(name: 'amount') // this is needed because depending on which endpoint is pinged, the name changes :(
   final double? amount;
   /// the unit associated with the amount ie. 'mg', 'g'
   final String? unitName;
@@ -87,6 +93,18 @@ class FoodDataService {
     if(response.statusCode == 200) {
       var prRaw = jsonDecode(response.body) as Map<String, dynamic>; //parsedResponse as raw json
       var pr = prRaw['foods'][0];
+      /* if this is true, then they are using differently named keys, and we have to map them back
+      * to the regular names for the jsonSerializer to instantiate the foodNutrients
+      * properly. We can't just use @JsonKey('nutrientNumber') because it would
+      * break fetchFoodFromFdcId(). I wish their naming was consistent :(
+      * */
+      if(pr['foodNutrients'].first.containsKey("nutrientNumber")) {
+        for(var nutrient in pr['foodNutrients']) {
+          nutrient['number'] = nutrient['nutrientNumber'];
+          nutrient['name'] = nutrient['nutrientName'];
+          nutrient['amount'] = nutrient['value'];
+        }
+      }
       return Food.fromJson(pr);
     }
     else {
