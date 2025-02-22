@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'dart:async';
 
 class User {
   final int id;
@@ -43,12 +44,18 @@ class LocalDataService {
       // path to perform database upgrades and downgrades.
       version: 1,
     );
+    _initialized = true;
   }
 
-  factory LocalDataService() {
+  Future<LocalDataService> getLocalDataService() async {
+    if (!_initialized) {
+      await initDatabase();
+    }
+
     return _localDataService;
   }
 
+  
 
 
 }
