@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'Services/FoodDataService.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+import 'package:flutter/widgets.dart';
 
-void main() {
+void main() async {
+  // Avoid errors caused by flutter upgrade.
+// Importing 'package:flutter/widgets.dart' is required.
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
