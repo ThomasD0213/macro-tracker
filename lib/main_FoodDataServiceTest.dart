@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'Services/FoodDataService.dart';
+import 'package:macro_tracker/Services/FoodDataService.dart';
+import 'package:macro_tracker/Services/Food.dart';
+import 'package:macro_tracker/Services/FoodNutrient.dart';
 
 void main() {
   runApp(const MyApp());
