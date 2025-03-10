@@ -1,0 +1,2 @@
+C:/Users/Noahh/AndroidStudioProjects/macro-tracker/android/app/.cxx/Debug/395f2236/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/Noahh/AndroidStudioProjects/macro-tracker/android/app/.cxx/Debug/395f2236/x86_64/CMakeFiles/rebuild_cache.dir
