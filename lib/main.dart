@@ -125,7 +125,6 @@ class _BottomAppBar extends StatelessWidget {
 }
 
 class FirstRoute extends StatelessWidget {
-
   const FirstRoute({Key? key}) : super(key: key);
 
   @override
@@ -133,13 +132,13 @@ class FirstRoute extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Third route (to become notification bar)"),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ), // AppBar
       body: Center(
         child: ElevatedButton(
           style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(Colors.green),
+              backgroundColor: WidgetStateProperty.all(Colors.blue),
               foregroundColor: WidgetStateProperty.all(Colors.white)),
           onPressed: () {
             Navigator.push(
@@ -167,7 +166,7 @@ class SecondRoute extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Calendar"),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ), // AppBar
       body: TableCalendar(
@@ -212,13 +211,13 @@ class ThirdRoute extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Third route (to become notification bar)"),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ), // AppBar
       body: Center(
         child: ElevatedButton(
           style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(Colors.green),
+              backgroundColor: WidgetStateProperty.all(Colors.blue),
               foregroundColor: WidgetStateProperty.all(Colors.white)),
           onPressed: () {
             Navigator.push(
@@ -242,13 +241,13 @@ class FourthRoute extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Fourth route (to become User)"),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ), // AppBar
       body: Center(
         child: ElevatedButton(
           style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(Colors.green),
+              backgroundColor: WidgetStateProperty.all(Colors.blue),
               foregroundColor: WidgetStateProperty.all(Colors.white)),
           onPressed: () {
             Navigator.push(
