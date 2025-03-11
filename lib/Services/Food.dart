@@ -5,6 +5,8 @@ part 'Food.g.dart';
 /// based off of AbridgedFoodItem schema from https://app.swaggerhub.com/apis/fdcnal/food-data_central_api/1.0.1#/AbridgedFoodItem
 @JsonSerializable(explicitToJson: true)
 class Food {
+  /// Id for our local sqlite database
+  final int id;
   /// Datatype as it is stored in the FDC database. ie. 'Branded'
   final String dataType; // Datatype from https://fdc.nal.usda.gov/data-documentation
   /// Description of the food item ie. 'AMERICAN CHEESE SLICE'
@@ -24,10 +26,14 @@ class Food {
   /// only applies to Survey Foods
   final String? foodCode;
 
-  const Food({required this.dataType, required this.description, required this.fdcId,
+  const Food({required this.id, required this.dataType, required this.description, required this.fdcId,
     this.foodNutrients, this.publicationDate, this.brandOwner, this.gtinUpc, this.ndbNumber, this.foodCode});
 
   factory Food.fromJson(Map<String, dynamic> json) => _$FoodFromJson(json);
 
   Map<String, dynamic> toJson() => _$FoodToJson(this);
+
+  Map<String, Object?> toMap() {
+    return {'dataType': dataType, 'description': description, 'fdcId': fdcId, 'foodNutrients': foodNutrients, 'publicationDate': publicationDate, 'brandOwner': brandOwner, 'gtinUpc': gtinUpc, 'ndbNumber': ndbNumber, 'foodCode': foodCode};
+  }
 }

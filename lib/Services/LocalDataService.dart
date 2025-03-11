@@ -66,10 +66,36 @@ class LocalDataService {
   Future<void> insertFood(Food food) async {
     final db = await getDatabase();
 
-    await db.insert('food', food.toMap(), conflictAlgorithm: ConflictAlgorithm.values);
+    await db.insert('foods', food.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
 
   }
-  
+
+  // A method that retrieves all the dogs from the dogs table.
+  Future<List<Food>> foods() async {
+    // Get a reference to the database.
+    final db = await getDatabase();
+
+    // Query the table for all the dogs.
+    final List<Map<String, Object?>> foodMaps = await db.query('foods');
+
+    // Convert the list of each dog's fields into a list of `Food` objects.
+    return [
+      for (final {
+      'id': id as int,
+      'dataType': dataType as String,
+      'description': description as String,
+      'fdicId': fdicId as int,
+      'foodNutrients': foodNutrients as List<FoodNutrient>?,
+      'publicationDate': publicationDate as String?,
+      'brandOwner': brandOwner as String?,
+      'gtinUpc': gtinUpc as String?,
+      'ndbNumber': ndbNumber as int?,
+      'foodCode': foodCode as String?
+      }
+      in foodMaps)
+        Food(id: id, dataType: dataType, description: description, fdcId: fdicId, foodNutrients: foodNutrients, publicationDate: publicationDate, brandOwner: brandOwner, gtinUpc: gtinUpc, ndbNumber: ndbNumber, foodCode: foodCode)
+    ];
+  }
 
 
 }
