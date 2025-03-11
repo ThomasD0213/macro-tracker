@@ -1,36 +1,10 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:macro_tracker/Services/Food.dart';
+import 'package:macro_tracker/Services/FoodNutrient.dart';
+import 'package:macro_tracker/Services/User.dart';
 import 'dart:async';
 
-class User {
-  final int id;
-  /// Current age of the user. Used to calculate BMR and TDEE
-  final int? age;
-  /// The users inputted name, used for dynamic greetings throughout the app
-  final String name;
-  /// weight in kg. Converted to Lbs or Stone depending on user settings
-  final double? weight;
-  /// height in cm. Converted to Meters or Imperial depending on user settings
-  final double? height;
-  /// Sex assigned at birth of the user. Determines which calculation to use for BMR and TDEE
-  final String? sex;
-  /// Basal Metabolic Rate, calculated using the Mifflin St. Jeor Formula
-  final double? bmr;
-  /// Total Daily Energy Expenditure, calculated using the BMR * (activity offset). The offset is derived from bodybuilding.com
-  final double? tdee;
-
-  const User({required this.id, required this.name, this.age, this.weight, this.height, this.sex, this.bmr, this.tdee});
-
-  Map<String, Object?> toMap() {
-    return {'id': id, 'name': name, 'age': age, 'weight': weight, 'height': height, 'sex': sex, 'bmr': bmr, 'tdee': tdee};
-  }
-
-  @override
-  String toString() {
-    return "User['id': $id, 'name': $name, 'age': $age, 'weight': $weight, 'height': $height, 'sex':$sex, 'bmr':$bmr, 'tdee':$tdee]";
-  }
-
-}
 
 class LocalDataService {
   static final LocalDataService _localDataService = LocalDataService._internal(); // initializes service as a singleton
@@ -78,10 +52,10 @@ class LocalDataService {
     // Get a reference to the database.
     final db = await getDatabase();
 
-    // Insert the Dog into the correct table. You might also specify the
-    // `conflictAlgorithm` to use in case the same dog is inserted twice.
+    // Insert the User into the correct table. You might also specify the
+    // `conflictAlgorithm` to use in case the same user is inserted twice.
     //
-    // In this case, replace any previous data.
+    // In this case, replace any previous data. As there should only be 1 user
     await db.insert(
       'users',
       user.toMap(),
@@ -90,6 +64,9 @@ class LocalDataService {
   }
 
   Future<void> insertFood(Food food) async {
+    final db = await getDatabase();
+
+    await db.insert('food', food.toMap(), conflictAlgorithm: ConflictAlgorithm.values);
 
   }
   
