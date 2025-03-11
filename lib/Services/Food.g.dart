@@ -1,29 +1,10 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'FoodDataService.dart';
+part of 'Food.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
-
-FoodNutrient _$FoodNutrientFromJson(Map<String, dynamic> json) => FoodNutrient(
-      number: json['number'] as String?,
-      name: json['name'] as String?,
-      amount: (json['amount'] as num?)?.toDouble(),
-      unitName: json['unitName'] as String?,
-      derivationCode: json['derivationCode'] as String?,
-      derivationDescription: json['derivationDescription'] as String?,
-    );
-
-Map<String, dynamic> _$FoodNutrientToJson(FoodNutrient instance) =>
-    <String, dynamic>{
-      'number': instance.number,
-      'name': instance.name,
-      'amount': instance.amount,
-      'unitName': instance.unitName,
-      'derivationCode': instance.derivationCode,
-      'derivationDescription': instance.derivationDescription,
-    };
 
 Food _$FoodFromJson(Map<String, dynamic> json) => Food(
       dataType: json['dataType'] as String,
