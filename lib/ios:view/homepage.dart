@@ -83,6 +83,8 @@ class HomeScreen extends StatelessWidget {
         ],
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
       ),
     );
   }
