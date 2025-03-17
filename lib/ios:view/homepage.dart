@@ -77,7 +77,7 @@ class HomeScreen extends StatelessWidget {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.calendar_today), label: ""),
-          BottomNavigationBarItem(icon: Center(child: Icon(Icons.add_circle, size: 35)), label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.add_circle, size: 35), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.notifications), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
         ],
