@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'MainPage.dart';
+import "Calendar.dart";
+import 'Notifications.dart';
+import 'User.dart';
 
 
 /// Flutter code sample for [BottomAppBar].
@@ -39,7 +43,7 @@ class _MacroTrackerState extends State<MacroTracker> {
             ),
           ],
         ),
-        bottomNavigationBar: _BottomAppBar(
+        bottomNavigationBar: CustomBottomAppBar(
           shape: _showNotch ? const CircularNotchedRectangle() : null,
         ),
       ),
@@ -48,8 +52,8 @@ class _MacroTrackerState extends State<MacroTracker> {
 }
 
 // This is for the bottom bar with all the navigation options. If using multiple files, just copy paste this so that its everywhere.
-class _BottomAppBar extends StatelessWidget {
-  const _BottomAppBar({
+class CustomBottomAppBar extends StatelessWidget {
+  const CustomBottomAppBar({
     this.shape = const CircularNotchedRectangle(),
   });
 
@@ -124,141 +128,3 @@ class _BottomAppBar extends StatelessWidget {
   }
 }
 
-class FirstRoute extends StatelessWidget {
-  const FirstRoute({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Third route (to become notification bar)"),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-      ), // AppBar
-      body: Center(
-        child: ElevatedButton(
-          style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(Colors.blue),
-              foregroundColor: WidgetStateProperty.all(Colors.white)),
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const MacroTracker())
-            );
-          },
-          child: const Text('Back from third route!'),
-        ), // ElevatedButton
-
-      ),
-      bottomNavigationBar: _BottomAppBar(),
-    ); // Scaffold
-  }
-}
-
-// Calendar gotten from https://pub.dev/packages/table_calendar
-class SecondRoute extends StatelessWidget {
-  CalendarFormat _calendarFormat = CalendarFormat.month;
-  DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Calendar"),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-      ), // AppBar
-      body: TableCalendar(
-        firstDay: DateTime.utc(2010, 10, 16),
-        lastDay: DateTime.utc(2030, 3, 14),
-        focusedDay: DateTime.now(),
-        calendarFormat: _calendarFormat,
-        selectedDayPredicate: (day) {
-          return isSameDay(_selectedDay, day);
-        },
-        onDaySelected: (selectedDay, focusedDay) {
-          if (!isSameDay(_selectedDay, selectedDay)) {
-            setState(() {
-              _selectedDay = selectedDay;
-              _focusedDay = focusedDay;
-            });
-          }
-        },
-          onFormatChanged: (format) {
-          if (_calendarFormat != format) {
-            setState(() {
-              _calendarFormat = format;
-            });
-          }
-        },
-        onPageChanged: (focusedDay) {
-          _focusedDay = focusedDay;
-        }
-      ), // Center
-      bottomNavigationBar: _BottomAppBar(),
-    ); // Scaffold
-  }
-
-  void setState(Null Function() param0) {}
-}
-
-class ThirdRoute extends StatelessWidget {
-  const ThirdRoute({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Third route (to become notification bar)"),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-      ), // AppBar
-      body: Center(
-        child: ElevatedButton(
-          style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(Colors.blue),
-              foregroundColor: WidgetStateProperty.all(Colors.white)),
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const MacroTracker())
-            );
-          },
-          child: const Text('Back from third route!'),
-        ), // ElevatedButton
-      ), // Center
-      bottomNavigationBar: _BottomAppBar(),
-    ); // Scaffold
-  }
-}
-
-class FourthRoute extends StatelessWidget {
-  const FourthRoute({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Fourth route (to become User)"),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-      ), // AppBar
-      body: Center(
-        child: ElevatedButton(
-          style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(Colors.blue),
-              foregroundColor: WidgetStateProperty.all(Colors.white)),
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const MacroTracker())
-            );
-          },
-          child: const Text('Back from Fourth route!'),
-        ), // ElevatedButton
-      ), // Center
-      bottomNavigationBar: _BottomAppBar(),
-    ); // Scaffold
-  }
-}
