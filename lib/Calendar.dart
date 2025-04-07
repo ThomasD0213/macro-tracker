@@ -4,7 +4,11 @@ import 'package:table_calendar/table_calendar.dart';
 
 
 // Calendar gotten from https://pub.dev/packages/table_calendar
-class SecondRoute extends StatelessWidget {
+class SecondRoute extends StatefulWidget {
+  State<SecondRoute> createState() => _SecondRouteState();
+}
+
+class _SecondRouteState extends State<SecondRoute> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
@@ -47,6 +51,4 @@ class SecondRoute extends StatelessWidget {
       bottomNavigationBar: CustomBottomAppBar(),
     ); // Scaffold
   }
-
-  void setState(Null Function() param0) {}
 }
