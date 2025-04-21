@@ -13,18 +13,7 @@ class FourthRoute extends StatelessWidget {
         foregroundColor: Colors.white,
       ), // AppBar
       body: Center(
-        child: ElevatedButton(
-          style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(Colors.blue),
-              foregroundColor: WidgetStateProperty.all(Colors.white)),
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const MacroTracker())
-            );
-          },
-          child: const Text('Back from Fourth route!'),
-        ), // ElevatedButton
+        child: const Text("Changed Area")
       ), // Centerd
       bottomNavigationBar: CustomBottomAppBar(),
     ); // Scaffold
