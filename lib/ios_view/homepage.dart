@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
               child: CircularPercentIndicator(
                 radius: 120.0,
                 lineWidth: 15.0,
-                percent: 0.75, // 75% progress
+                percent: 0.75, // 75% progress will change once we have actual values to trach
                 center: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -77,7 +77,7 @@ class HomeScreen extends StatelessWidget {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.calendar_today), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.add_circle, size: 35), label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.add_circle), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.notifications), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
         ],
