@@ -3,6 +3,8 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'aboutpage.dart';
 import 'calendar.dart';
 import 'userprofile.dart';
+import 'AddFood.dart';
+import 'package:macro_tracker/Models/Data.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,13 +24,15 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  final Data data = Data();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Welcome <\$USER>"),
+        title: Text("Welcome ${data.name}"),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -76,7 +80,9 @@ class HomeScreen extends StatelessWidget {
                 border: Border.all(color: Colors.black, width: 2),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Center(child: Text("No data yet")),
+              child: Center(child: ListView(
+                children: data.getTextBoxes()
+              )),
             ),
           ],
         ),
@@ -107,6 +113,12 @@ class HomeScreen extends StatelessWidget {
               MaterialPageRoute(builder: (context) => SecondRoute()),
             );
           }
+          if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddFood()),
+            );
+          }
           if (index == 4) { // Notifications icon is at index 4
             Navigator.push(
               context,
@@ -116,6 +128,25 @@ class HomeScreen extends StatelessWidget {
         },
       ),
     );
+  }
+  double calculateCaloriesPercent() {
+    // Replace with actual logic
+    return data.totCals; //
+  }
+
+  double calculateProteinPercent() {
+    // Replace with actual logic
+    return data.totProtein; //
+  }
+
+  double calculateFatPercent() {
+    // Replace with actual logic
+    return data.totFat; //
+  }
+
+  double calculateCarbsPercent() {
+    // Replace with actual logic
+    return data.totCarbs; //
   }
 }
   Widget _buildMacroIndicator(String label, double percent, Color color) {
@@ -134,23 +165,4 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: color.withOpacity(0.2),
       circularStrokeCap: CircularStrokeCap.round,
     );
-     double calculateCaloriesPercent() {
-    // Replace with actual logic
-    return 0.75; // 
-  }
-
-  double calculateProteinPercent() {
-    // Replace with actual logic
-    return 0.6; // 
-  }
-
-  double calculateFatPercent() {
-    // Replace with actual logic
-    return 0.4; // 
-  }
-
-  double calculateCarbsPercent() {
-    // Replace with actual logic
-    return 0.8; // 
-  }
 }

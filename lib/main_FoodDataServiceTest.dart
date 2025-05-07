@@ -75,8 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    futureFood = fds.fetchFoodFromFdcId(1592891);
+    //futureFood = fds.fetchFoodFromFdcId(1592891);
     //futureFood = fds.fetchFoodFromGtinUpc("021000036868");
+    futureFood = fds.fetchFoodFromGtinUpc("012000018770");
   }
 
   @override

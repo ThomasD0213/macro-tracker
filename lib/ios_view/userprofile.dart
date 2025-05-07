@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:macro_tracker/Models/Data.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -17,44 +17,14 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfile> {
-  String gender = 'M';
-  double heightInInches = 70; // 5'10"
-  double weightInPounds = 180;
-  int age = 23;
-
-  bool loseWeight = false;
-  bool highProtein = false;
-  bool veryActive = false;
-
-  double get bmr {
-    if (gender == 'M') {
-      return 66 + (6.23 * weightInPounds) + (12.7 * heightInInches) - (6.8 * age);
-    } else {
-      return 655 + (4.35 * weightInPounds) + (4.7 * heightInInches) - (4.7 * age);
-    }
-  }
-
-  double get totalCalories {
-    double multiplier = 1.2; // Sedentary by default
-    if (veryActive) multiplier = 1.725;
-    if (loseWeight) multiplier -= 0.2; // Reduce for weight loss
-    return bmr * multiplier;
-  }
-
-  Map<String, int> getMacros() {
-    double cals = totalCalories;
-    int protein = highProtein ? ((cals * 0.30) / 4).round() : ((cals * 0.25) / 4).round();
-    int carbs = ((cals * 0.45) / 4).round();
-    int fats = ((cals * 0.30) / 9).round();
-    return {'Protein': protein, 'Carbs': carbs, 'Fats': fats};
-  }
 
   @override
   Widget build(BuildContext context) {
-    final macros = getMacros();
+    Data data = Data();
+    final macros = data.getMacros();
 
     return Scaffold(
-      appBar: AppBar(title: Text("User's Goals")),
+      appBar: AppBar(title: Text("${data.name}'s Goals")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -64,9 +34,9 @@ class _UserProfilePageState extends State<UserProfile> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 DropdownButton<String>(
-                  value: gender,
+                  value: data.gender,
                   items: ['M', 'F'].map((g) => DropdownMenuItem(value: g, child: Text(g))).toList(),
-                  onChanged: (val) => setState(() => gender = val!),
+                  onChanged: (val) => setState(() => data.gender = val!),
                 ),
                 SizedBox(width: 10),
                 Text("Height:"),
@@ -74,8 +44,8 @@ class _UserProfilePageState extends State<UserProfile> {
                   width: 60,
                   child: TextField(
                     keyboardType: TextInputType.number,
-                    onChanged: (val) => setState(() => heightInInches = double.tryParse(val) ?? heightInInches),
-                    decoration: InputDecoration(hintText: "${heightInInches.toInt()} in"),
+                    onChanged: (val) => setState(() => data.heightInInches = double.tryParse(val) ?? data.heightInInches),
+                    decoration: InputDecoration(hintText: "${data.heightInInches.toInt()} in"),
                   ),
                 ),
                 Text("Weight:"),
@@ -83,8 +53,8 @@ class _UserProfilePageState extends State<UserProfile> {
                   width: 60,
                   child: TextField(
                     keyboardType: TextInputType.number,
-                    onChanged: (val) => setState(() => weightInPounds = double.tryParse(val) ?? weightInPounds),
-                    decoration: InputDecoration(hintText: "${weightInPounds.toInt()} lbs"),
+                    onChanged: (val) => setState(() => data.weightInPounds = double.tryParse(val) ?? data.weightInPounds),
+                    decoration: InputDecoration(hintText: "${data.weightInPounds.toInt()} lbs"),
                   ),
                 ),
                 Text("Age:"),
@@ -92,8 +62,8 @@ class _UserProfilePageState extends State<UserProfile> {
                   width: 50,
                   child: TextField(
                     keyboardType: TextInputType.number,
-                    onChanged: (val) => setState(() => age = int.tryParse(val) ?? age),
-                    decoration: InputDecoration(hintText: "$age"),
+                    onChanged: (val) => setState(() => data.age = int.tryParse(val) ?? data.age),
+                    decoration: InputDecoration(hintText: "${data.age}"),
                   ),
                 ),
               ],
@@ -104,8 +74,8 @@ class _UserProfilePageState extends State<UserProfile> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text("BMR: ${bmr.round()}"),
-                Text("Total Cals: ${totalCalories.round()}"),
+                Text("BMR: ${data.bmr.round()}"),
+                Text("Total Cals: ${data.totalCalories.round()}"),
               ],
             ),
             SizedBox(height: 20),
@@ -124,18 +94,18 @@ class _UserProfilePageState extends State<UserProfile> {
             // Checkboxes
             CheckboxListTile(
               title: Text("Lose Weight"),
-              value: loseWeight,
-              onChanged: (val) => setState(() => loseWeight = val!),
+              value: data.loseWeight,
+              onChanged: (val) => setState(() => data.loseWeight = val!),
             ),
             CheckboxListTile(
               title: Text("High Protein"),
-              value: highProtein,
-              onChanged: (val) => setState(() => highProtein = val!),
+              value: data.highProtein,
+              onChanged: (val) => setState(() => data.highProtein = val!),
             ),
             CheckboxListTile(
               title: Text("Very Active"),
-              value: veryActive,
-              onChanged: (val) => setState(() => veryActive = val!),
+              value: data.veryActive,
+              onChanged: (val) => setState(() => data.veryActive = val!),
             ),
           ],
         ),
