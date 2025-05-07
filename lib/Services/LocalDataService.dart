@@ -93,7 +93,7 @@ class LocalDataService {
       'foodCode': foodCode as String?
       }
       in foodMaps)
-        Food(id: id, dataType: dataType, description: description, fdcId: fdicId, foodNutrients: foodNutrients, publicationDate: publicationDate, brandOwner: brandOwner, gtinUpc: gtinUpc, ndbNumber: ndbNumber, foodCode: foodCode)
+        Food(dataType: dataType, description: description, fdcId: fdicId, foodNutrients: foodNutrients, publicationDate: publicationDate, brandOwner: brandOwner, gtinUpc: gtinUpc, ndbNumber: ndbNumber, foodCode: foodCode)
     ];
   }
 
