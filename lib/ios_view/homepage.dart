@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'aboutpage.dart';
 import 'calendar.dart';
+import 'userprofile.dart';
+
 void main() {
   runApp(MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -39,7 +42,7 @@ class HomeScreen extends StatelessWidget {
               child: CircularPercentIndicator(
                 radius: 120.0,
                 lineWidth: 15.0,
-                percent: 0.75, // 75% progress will change once we have actual values to trach
+                percent: calculateCaloriesPercent(), // 75% progress will change once we have actual values to trach
                 center: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -59,9 +62,9 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildMacroIndicator("Protein", 0.6, Colors.purple),
-                _buildMacroIndicator("Carbs", 0.5, Colors.green),
-                _buildMacroIndicator("Fats", 0.4, Colors.orange),
+                _buildMacroIndicator("Protein", calculateProteinPercent(), Colors.purple),
+                _buildMacroIndicator("Carbs", calculateFatPercent(), Colors.green),
+                _buildMacroIndicator("Fats", calculateCarbsPercent(), Colors.orange),
               ],
             ),
             SizedBox(height: 20),
@@ -92,7 +95,7 @@ class HomeScreen extends StatelessWidget {
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,
         onTap: (index) {
-          if (index == 4) { // Person icon is at index 4
+          if (index == 3) { // Person icon is at index 4
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => AboutPage()),
@@ -102,6 +105,12 @@ class HomeScreen extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => SecondRoute()),
+            );
+          }
+          if (index == 4) { // Notifications icon is at index 4
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => UserProfile()),
             );
           }
         },
@@ -125,4 +134,23 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: color.withOpacity(0.2),
       circularStrokeCap: CircularStrokeCap.round,
     );
+     double calculateCaloriesPercent() {
+    // Replace with actual logic
+    return 0.75; // 
   }
+
+  double calculateProteinPercent() {
+    // Replace with actual logic
+    return 0.6; // 
+  }
+
+  double calculateFatPercent() {
+    // Replace with actual logic
+    return 0.4; // 
+  }
+
+  double calculateCarbsPercent() {
+    // Replace with actual logic
+    return 0.8; // 
+  }
+}
