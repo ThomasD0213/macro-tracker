@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-
+import 'aboutpage.dart';
+import 'calendar.dart';
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,6 +19,8 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,21 +79,36 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0, // Add this to highlight the selected tab
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.calendar_today), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.add_circle), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.notifications), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: ""), // Person icon
         ],
         showSelectedLabels: false,
         showUnselectedLabels: false,
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,
+        onTap: (index) {
+          if (index == 4) { // Person icon is at index 4
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AboutPage()),
+            );
+          }
+          if (index == 1) { // Calendar icon is at index 1
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SecondRoute()),
+            );
+          }
+        },
       ),
     );
   }
-
+}
   Widget _buildMacroIndicator(String label, double percent, Color color) {
     return CircularPercentIndicator(
       radius: 60.0,
@@ -98,7 +118,7 @@ class HomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Divider(thickness: 1),
-          Text(label + " To go", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+          Text("$label To go", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
         ],
       ),
       progressColor: color,
@@ -106,4 +126,3 @@ class HomeScreen extends StatelessWidget {
       circularStrokeCap: CircularStrokeCap.round,
     );
   }
-}

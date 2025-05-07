@@ -14,4 +14,7 @@ class MyApp extends extends StatelessWidget {
   }
 }
 
-class UserProfileScreen extends StatelessWidget
+class UserProfileScreen extends StatelessWidget {
+  const UserProfileScreen({super.key});
+
+}

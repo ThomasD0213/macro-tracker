@@ -1,9 +1,7 @@
 import "dart:convert";
 
 import "package:http/http.dart" as http;
-import "package:json_annotation/json_annotation.dart";
 import "package:macro_tracker/Services/Food.dart";
-import "package:macro_tracker/Services/FoodNutrient.dart";
 
 class FoodDataService {
 
