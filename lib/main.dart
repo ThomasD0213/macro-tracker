@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'MainPage.dart';
 import "Calendar.dart";
 import 'Notifications.dart';
 import 'User.dart';
+import 'main_FoodDataServiceTest.dart';
 
 
 /// Flutter code sample for [BottomAppBar].
@@ -49,6 +49,8 @@ class _MacroTrackerState extends State<MacroTracker> {
       ),
     );
   }
+
+
 }
 
 // This is for the bottom bar with all the navigation options. If using multiple files, just copy paste this so that its everywhere.
@@ -72,7 +74,7 @@ class CustomBottomAppBar extends StatelessWidget {
             IconButton(tooltip: 'Navigation', icon: const Icon(Icons.home), onPressed: () {
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FirstRoute())
+                  MaterialPageRoute(builder: (context) => FirstRoute(title: '',))
               );
             }),
             IconButton(tooltip: 'Calendar', icon: const Icon(Icons.calendar_month), onPressed: () {
