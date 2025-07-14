@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Services/FoodDataService.dart';
-
+import 'package:macro_tracker/main.dart';
 
 class FirstRoute extends StatefulWidget {
   const FirstRoute({super.key, required this.title});
@@ -40,7 +40,7 @@ class _MyHomePageState extends State<FirstRoute> {
   void initState() {
     super.initState();
     // futureFood = fds.fetchFoodFromFdcId(1592891);
-    futureFood = fds.fetchFoodFromGtinUpc("00016000162433");
+    futureFood = fds.fetchFoodFromGtinUpc(BarCodeId.text);
   }
 
   @override

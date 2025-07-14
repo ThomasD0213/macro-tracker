@@ -8,9 +8,13 @@ import 'main_FoodDataServiceTest.dart';
 
 /// Flutter code sample for [BottomAppBar].
 
+
 void main() {
   runApp(MacroTracker());
 }
+
+final TextEditingController BarCodeId = TextEditingController();
+
 
 class MacroTracker extends StatefulWidget {
   const MacroTracker({super.key});
@@ -98,7 +102,17 @@ class CustomBottomAppBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            const Text('Modal BottomSheet'),
+                            TextField(
+                              controller: BarCodeId,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: "Enter a barcode"
+                              ),
+                            ),
+                            ElevatedButton(
+                              child: const Text('Input Barcodce'),
+                              onPressed: () => Navigator.pop(context),
+                            ),
                             ElevatedButton(
                               child: const Text('Close BottomSheet'),
                               onPressed: () => Navigator.pop(context),
