@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'Services/FoodDataService.dart';
 import 'package:macro_tracker/main.dart';

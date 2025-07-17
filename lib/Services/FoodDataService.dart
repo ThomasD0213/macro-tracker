@@ -89,7 +89,7 @@ class FoodDataService {
 
   Future<Food> fetchFoodFromGtinUpc(String upc) async {
     final response = await http.get(
-      Uri.parse('https://api.nal.usda.gov/fdc/v1/foods/search?query=$upc&api_key=$API_KEY'),
+      Uri.parse('https://api.nal.usda.gov/fdc/v1/foods/search?query=$upc$API_KEY_PARAM'),
     );
 
     if (response.statusCode == 200) {
@@ -100,13 +100,7 @@ class FoodDataService {
         throw Exception("No food found for UPC $upc");
       }
 
-      return Food.fromJson(foods[0]);
-    } else {
-      print("❌ Error fetching food: ${response.statusCode} - ${response.body}");
-      throw Exception("Failed to load food for UPC $upc");
-    }
-    String dataType = "Branded"; // it is assumed that if a gtinUpc (barcode) is being read that it's a branded item
-    if(response.statusCode == 200) {
+      final foodMap = foods[0];
       var prRaw = jsonDecode(response.body) as Map<String, dynamic>; //parsedResponse as raw json
       var pr = prRaw['foods'][0];
       /* if this is true, then they are using differently named keys, and we have to map them back
