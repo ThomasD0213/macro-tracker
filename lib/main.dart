@@ -78,7 +78,7 @@ class CustomBottomAppBar extends StatelessWidget {
             IconButton(tooltip: 'Navigation', icon: const Icon(Icons.home), onPressed: () {
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FirstRoute(title: '',))
+                  MaterialPageRoute(builder: (context) => FirstRoute(title: '', barcode: '',))
               );
             }),
             IconButton(tooltip: 'Calendar', icon: const Icon(Icons.calendar_month), onPressed: () {
@@ -105,13 +105,17 @@ class CustomBottomAppBar extends StatelessWidget {
                             TextField(
                               controller: BarCodeId,
                               decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                hintText: "Enter a barcode"
-                              ),
+                                border: OutlineInputBorder(), hintText: "Enter a barcode"),
                             ),
                             ElevatedButton(
-                              child: const Text('Input Barcodce'),
-                              onPressed: () => Navigator.pop(context),
+                              child: const Text('Input Barcode'),
+                              onPressed: () {
+                                Navigator.pop(context);
+                                Navigator.push(context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            FirstRoute(title: "Food Details", barcode: BarCodeId.text,)));
+                              }
                             ),
                             ElevatedButton(
                               child: const Text('Close BottomSheet'),

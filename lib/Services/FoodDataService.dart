@@ -68,7 +68,7 @@ class FoodDataService {
 
   static final FoodDataService _foodDataService = FoodDataService._internal(); // initializes service as a singleton
   static final String API_URL = "https://api.nal.usda.gov/fdc";
-  static final String API_KEY = "DEMO_KEY"; // TODO: figure out how to do .env or safe storage of api keys
+  static final String API_KEY = "L7M9ZJZ2tyw4SlpmmxjbiiRQGj2Wf7a245UwkDpB"; // TODO: figure out how to do .env or safe storage of api keys
   static final String API_KEY_PARAM = "&api_key=$API_KEY";
   FoodDataService._internal();
 
@@ -87,9 +87,25 @@ class FoodDataService {
     }
   }
 
-  Future<Food> fetchFoodFromGtinUpc(String gtinUpc) async {
+  Future<Food> fetchFoodFromGtinUpc(String upc) async {
+    final response = await http.get(
+      Uri.parse('https://api.nal.usda.gov/fdc/v1/foods/search?query=$upc&api_key=$API_KEY'),
+    );
+
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      final List foods = jsonData['foods'];
+
+      if (foods.isEmpty) {
+        throw Exception("No food found for UPC $upc");
+      }
+
+      return Food.fromJson(foods[0]);
+    } else {
+      print("❌ Error fetching food: ${response.statusCode} - ${response.body}");
+      throw Exception("Failed to load food for UPC $upc");
+    }
     String dataType = "Branded"; // it is assumed that if a gtinUpc (barcode) is being read that it's a branded item
-    final response = await http.get(Uri.parse("$API_URL/v1/foods/search?query=$gtinUpc&dataType=$dataType$API_KEY_PARAM"));
     if(response.statusCode == 200) {
       var prRaw = jsonDecode(response.body) as Map<String, dynamic>; //parsedResponse as raw json
       var pr = prRaw['foods'][0];
