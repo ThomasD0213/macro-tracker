@@ -5,7 +5,6 @@ import '../Notifications.dart';
 import '../Views/Android/CalendarPage.dart';
 import '../Views/Android/SignUp.dart';
 import '../main.dart';
-import '../main_FoodDataServiceTest.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
   const CustomBottomAppBar({
@@ -27,7 +26,7 @@ class CustomBottomAppBar extends StatelessWidget {
             IconButton(tooltip: 'Navigation', icon: const Icon(Icons.home), onPressed: () {
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FirstRoute(title: '', barcode: '',))
+                  MaterialPageRoute(builder: (context) => SecondRoute())
               );
             }),
             IconButton(tooltip: 'Calendar', icon: const Icon(Icons.calendar_month), onPressed: () {

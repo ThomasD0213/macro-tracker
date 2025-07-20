@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import "package:macro_tracker/main.dart";
 import 'package:table_calendar/table_calendar.dart';
+import 'package:macro_tracker/Models/NavigationBar.dart';
 
 class SecondRoute extends StatefulWidget {
   @override
